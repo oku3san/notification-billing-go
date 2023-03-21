@@ -4,6 +4,7 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: go1.x
+  timeout: 30
 
 #  environment:
 
