@@ -1,0 +1,23 @@
+service: serverless
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: go1.x
+
+#  environment:
+
+functions:
+  billing:
+    handler: bin/notification-billing-go
+    events:
+      - http:
+          path: /
+          method: get
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    useDocker: true
