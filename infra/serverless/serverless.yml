@@ -7,8 +7,8 @@ provider:
   timeout: 30
 
   environment:
-    AccountID: 950007738962
-    BudgetName: "Monthly Cost"
+    AccountID: ${env:AccountID}
+    BudgetName: ${env:BudgetName}
 
 
 functions:
