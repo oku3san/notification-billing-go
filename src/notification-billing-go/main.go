@@ -6,6 +6,8 @@ import (
     "github.com/aws/aws-lambda-go/lambda"
     "github.com/aws/aws-sdk-go-v2/config"
     "github.com/aws/aws-sdk-go-v2/service/budgets"
+    "github.com/slack-go/slack"
+    "log"
     "os"
 )
 
@@ -46,7 +48,25 @@ func handler(ctx context.Context) (Response, error) {
         ForecastedSpend: *forecastedSpend,
     }
 
+    sendNotification(response)
+
     return response, nil
+}
+
+func sendNotification(response Response) error {
+    webhookURL := os.Getenv("WebhookURL")
+    message := response
+
+    payload := slack.WebhookMessage{
+        Text: message.ForecastedSpend,
+    }
+
+    err := slack.PostWebhook(webhookURL, &payload)
+    if err != nil {
+        log.Fatalf("error: %s", err)
+    }
+
+    return nil
 }
 
 func main() {

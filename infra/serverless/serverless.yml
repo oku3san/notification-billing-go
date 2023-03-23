@@ -9,6 +9,7 @@ provider:
   environment:
     AccountID: ${env:AccountID}
     BudgetName: ${env:BudgetName}
+    WebhookURL: ${env:WebhookURL}
 
 
 functions:
