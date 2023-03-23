@@ -6,7 +6,10 @@ provider:
   runtime: go1.x
   timeout: 30
 
-#  environment:
+  environment:
+    AccountID: 950007738962
+    BudgetName: "Monthly Cost"
+
 
 functions:
   billing:
