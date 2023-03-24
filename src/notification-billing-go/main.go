@@ -55,10 +55,10 @@ func handler(ctx context.Context) (Response, error) {
 
 func sendNotification(response Response) error {
     webhookURL := os.Getenv("WebhookURL")
-    message := response
+    message := fmt.Sprintf("実績値: $%s\n予測値: $%s", response.ActualSpend, response.ForecastedSpend)
 
     payload := slack.WebhookMessage{
-        Text: message.ForecastedSpend,
+        Text: message,
     }
 
     err := slack.PostWebhook(webhookURL, &payload)
