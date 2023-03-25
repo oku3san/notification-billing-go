@@ -53,6 +53,9 @@ func handler(ctx context.Context) (Response, error) {
     return response, nil
 }
 
+// Slack APIの呼び出しが完了したかどうかを保持するためのフラグ
+var slackAPICompleted int32
+
 func sendNotification(actualSpend, forecastedSpend string) error {
     webhookURL := os.Getenv("WebhookURL")
     message := fmt.Sprintf("実績値: $%s\n予測値: $%s", actualSpend, forecastedSpend)
@@ -82,9 +85,6 @@ func sendNotification(actualSpend, forecastedSpend string) error {
         time.Sleep(100 * time.Millisecond)
     }
 }
-
-// Slack APIの呼び出しが完了したかどうかを保持するためのフラグ
-var slackAPICompleted int32
 
 func main() {
     lambda.Start(handler)
