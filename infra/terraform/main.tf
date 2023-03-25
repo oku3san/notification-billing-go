@@ -59,3 +59,23 @@ resource "aws_lambda_function" "notification-billing-go" {
     }
   }
 }
+
+resource "aws_cloudwatch_event_rule" "notification-billing-go" {
+  name        = "notification-billing-go"
+  schedule_expression = "cron(30 15 * * ? *)"
+}
+
+resource "aws_cloudwatch_event_target" "notification-billing-go" {
+  target_id = "notification-billing-go"
+  arn       = aws_lambda_function.notification-billing-go.arn
+  rule      = aws_cloudwatch_event_rule.notification-billing-go.name
+
+}
+
+resource "aws_lambda_permission" "notification-billing-go" {
+  statement_id  = "notification-billing-go"
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.notification-billing-go.function_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.notification-billing-go.arn
+}
