@@ -48,12 +48,13 @@ resource "aws_lambda_function" "notification-billing-go" {
   role          = aws_iam_role.lambda_role.arn
   handler       = "notification-billing-go"
   runtime       = "go1.x"
+  publish       = true
 
   source_code_hash = filebase64sha256("artifact/notification-billing-go.zip")
 
   environment {
     variables = {
-      "AccountID" = var.AccountID
+      "AccountID"  = var.AccountID
       "BudgetName" = var.BudgetName
       "WebhookURL" = var.WebhookURL
     }
@@ -61,7 +62,7 @@ resource "aws_lambda_function" "notification-billing-go" {
 }
 
 resource "aws_cloudwatch_event_rule" "notification-billing-go" {
-  name        = "notification-billing-go"
+  name                = "notification-billing-go"
   schedule_expression = "cron(30 15 * * ? *)"
 }
 
