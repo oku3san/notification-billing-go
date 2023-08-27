@@ -13,7 +13,7 @@ provider:
 
 functions:
   billing:
-    handler: bin/bootstrap
+    handler: bootstrap
     events:
       - http:
           path: /
