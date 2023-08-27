@@ -10,7 +10,6 @@ terraform {
     region         = "ap-northeast-1"
     bucket         = "oku3san-tfstate-bucket"
     key            = "notification-billing-go-tfstate"
-    dynamodb_table = "tfstate_lock"
     role_arn       = "arn:aws:iam::950007738962:role/terraform"
   }
 }

@@ -2,7 +2,7 @@
 
 build:
 		pushd ./src/notification-billing-go/ && \
-    		GOOS=linux GOARCH=amd64 go build -o ./../../infra/serverless/bin/notification-billing-go ./main.go && \
+    		GOOS=linux GOARCH=amd64 go build -o ./../../infra/serverless/bin/bootstrap ./main.go && \
     		popd
 
 

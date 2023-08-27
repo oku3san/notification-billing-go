@@ -46,8 +46,8 @@ resource "aws_lambda_function" "notification-billing-go" {
   filename      = "artifact/notification-billing-go.zip"
   function_name = "notification-billing-go"
   role          = aws_iam_role.lambda_role.arn
-  handler       = "notification-billing-go"
-  runtime       = "go1.x"
+  handler       = "bootstrap"
+  runtime       = "provided.al2"
   publish       = true
 
   source_code_hash = filebase64sha256("artifact/notification-billing-go.zip")
